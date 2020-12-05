@@ -13,16 +13,14 @@ def search_and_download(search_term, target_path='images', number_images=40):
         
     with webdriver.Chrome(options=options) as driver:
         res = fetch_image_urls(search_term, number_images, driver=driver, sleep_between_interactions=0.5)
+        print("4. Get linkes: "+str(res))
     
     for elem in res:
         persist_image(target_folder, elem)
+    
+    print("5. finish")
 
 options = Options()
 options.add_argument("--headless")
 options.add_argument("--no-sandbox")
-
-if __name__ == "__main__":
-    search_term = "italy"
-    max_image = 50
-    
-    search_and_download(search_term=search_term, number_images=max_image)
+options.add_argument('--disable-dev-shm-usage') 
