@@ -18,6 +18,7 @@ def search_and_download(search_term, target_path='images', number_images=40):
     for elem in res:
         persist_image(target_folder, elem)
     
+    print("{} images downloaded Successfully!".format(len(res)))
     print("5. finish")
 
 options = Options()
