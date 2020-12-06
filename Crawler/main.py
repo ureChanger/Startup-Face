@@ -3,8 +3,8 @@
 from search_and_download import search_and_download
 
 
-keyword = ["스테파니리"]
-max_image = 30
+keyword = ["스테파니 리"]
+max_image = 430
     
 print("1. start search_and_download!")
     
