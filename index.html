@@ -93,7 +93,6 @@
         </section>
         <script
             class="jsbin"
-            
             src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"
         ></script>
         <div class="container mt-5 file-upload">
@@ -109,8 +108,13 @@
                 </div>
             </div>
             <div class="file-upload-content">
-                <img class="file-upload-image" src="#" alt="your image" />
+                <img class="file-upload-image" id="face-image" src="#" alt="your image" />
                 <div class="image-title-wrap">
+                    <div class="result">
+                        <p class="resultName d-flex flex-row bd-highlight"></p>
+                        <p class="resultMessage"></p>
+                        <div id="label-container"></div>
+                    </div>
                     <button type="button" onclick="removeUpload()" class="remove-image">
                         Remove <span class="image-title">Uploaded Image</span>
                     </button>
@@ -118,6 +122,177 @@
             </div>
         </div>
 
+        <div id="disqus_thread"></div>
+        <div id="disqus_thread"></div>
+        
+        <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.3.1/dist/tf.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@0.8/dist/teachablemachine-image.min.js"></script>
+        <script type="text/javascript">
+            // More API functions here:
+            // https://github.com/googlecreativelab/teachablemachine-community/tree/master/libraries/image
+
+            // the link to your model provided by Teachable Machine export panel
+            const URL = 'https://teachablemachine.withgoogle.com/models/GsAgSRu8e/';
+
+            let model, webcam, labelContainer, maxPredictions;
+
+            // Load the image model and setup the webcam
+            async function init() {
+                const modelURL = URL + 'model.json';
+                const metadataURL = URL + 'metadata.json';
+
+                // load the model and metadata
+                // Refer to tmImage.loadFromFiles() in the API to support files from a file picker
+                // or files from your local hard drive
+                // Note: the pose library adds "tmImage" object to your window (window.tmImage)
+                model = await tmImage.load(modelURL, metadataURL);
+                maxPredictions = model.getTotalClasses();
+
+                // append elements to the DOM
+                labelContainer = document.getElementById('label-container');
+                for (let i = 0; i < maxPredictions; i++) {
+                    // and class labels
+                    labelContainer.appendChild(document.createElement('div'));
+                }
+            }
+
+            // run the webcam image through the image model
+            async function predict() {
+                // predict can take in an image, video or canvas html element
+                face_image = document.getElementById('face-image')
+                const prediction = await model.predict(face_image);
+                prediction.sort((a, b) => (b.probability > a.probability) ? 1 : -1);
+                for (let i = 0; i < maxPredictions; i++) {
+                    const classPrediction =
+                        prediction[i].className + ': ' + prediction[i].probability.toFixed(2);
+                    labelContainer.childNodes[i].innerHTML = classPrediction;
+                }
+                const results = {
+                    dalmi: {
+                        name: "서달미: CEO",
+                        result_Message: "카페, 택배, 골프장, 서점, 콜센터 등등 각종 아르바이트를 섭렵한 다채로운 경력의 소유자다. 그 경력에서 체득한 영어, 일어, 중국어 실력 또한 수준급이다. 대학 대신 일찍 사회생활로 뛰어든 탓에 다채로운 경력을 얻었지만, 학벌이 빈약해 정규직이 아닌 계약직을 전전하게 된다. 현재는 루까 더 티 본사에서 계약직으로 일하고 있다."
+                    },
+                    dosan: {
+                        name: "남도산: CTO",
+                        result_Message: "삼산텍 창업자이자 천재적인 소프트웨어 엔지니어. 취미는 뜨개질, 매일 똑같은(본인은 디테일이 다르다 주장하는) 체크무늬 셔츠를 입고 다닌다. 모태솔로의 엘리트 코스라 불리는 남중, 남고, 공대를 밟아왔다. 별자리나 혈액형 따위로 운세와 성격을 정하는 행위를 싫어한다. 어린 시절 수학 올림피아드 최연소 대상을 수상하면서 일약 천재로 세간의 화제가 됐었다."
+                    },
+                    jipyeong: {
+                        name: "한지평: SH 벤처캐피탈 수석팀장",
+                        result_Message: "럭셔리카, 한강뷰의 고급 아파트를 자가로 소유하고 억대 연봉을 받으며 남성잡지 화보까지 찍는 그야말로 성공한 남자의 표본이다. 별명이 투자계의 고든 램지다. 첫째, 돈의 흐름을 읽는 귀신같은 투자실력 때문에.. 둘째, 창업자들이 상처받는 말만 쏙쏙 골라 하는 귀신같은 독설 때문에. 독사 같은 그가 한없이 순해지는 사람이 한 명 있다."
+                    },
+                    injae: {
+                        name: "원인재: 스타트업 네이쳐모닝 대표",
+                        result_Message: "학력, 미모, 재력 모든 것을 가졌다. 창업 이후 아버지인 원 회장의 재력과 인맥 덕에 단기간에 시장을 장악하고 승승장구했다. 때문에 사람들은 인재를 보고 말한다. 애초에 출발선부터 달랐으니 너무 불공평하다고. 젊은 나이에 거둔 인재의 성공은 온전히 재벌인 아버지 덕이라고.. '온전히'라고 하긴 좀 억울하다. 평온하고 고고한 백조 같은 인재의 두 발은 성공을 위해 물 아래에서 그 누구보다도 분주하게 움직여 왔다."
+                    },
+                    wondeok: {
+                        name: "최원덕: 달미의 친할머니",
+                        result_Message: "독실한 천주교 신자. 40년 전 남편과 사별한 후 핫도그 장사를 하며 아들을 대학에 보내고 장가까지 보냈다. 현재는 손녀 달미까지 거두고 살고 있다. 핫도그를 팔며 손님과 눈을 맞추며 진심을 전하고, 비 오는 날엔 조건 없이 우산을 빌려주며 가게를 찾는 이들을 넉넉한 인심으로 품었다. 그 인심으로 품은 사람 중에 15년 전 고아였던 한지평이 있다."
+                    },
+                    ahyeon: {
+                        name: "차아현: 달미와 인재의 엄마",
+                        result_Message: "사업을 하고 싶어 하는 청명과 이혼을 하고 인재와 함께 떠났다. 두고 온 둘째 딸 달미가 늘 마음에 남았지만 구질구질하게 살기 싫어 애써 외면했다. 이혼 후 재벌인 원 회장과 결혼을 하고 미국으로 이민을 갔다. 결혼하자마자 바람을 피우는 원 회장이 끔찍하게 싫었지만 그가 준 여러 혜택들을 포기하기 싫어 이혼은 차마 못 한 채 별거하며 산다."
+                    },
+                    cheolsan: {
+                        name: "이철산: 소프트웨어 엔지니어",
+                        result_Message: "매생이 양식장 집 둘째 아들. 전라도 사투리를 쓰는 공대 출신 소프트웨어 엔지니어. 남중, 남고, 공대 코스를 밟아온 모태솔로지만 대학에서만큼은 그 이력에서 벗어나고자 뜨개질 동아리 '패턴'을 만들었다. 훗날 그 동아리에서 만난 도산, 용산과 함께 삼산텍을 시작한다. 도산의 코딩 실력을 누구보다 잘 알기에 대표로 인정하고 따른다."
+                    },
+                    yongsan: {
+                        name: "김용산: 소프트웨어 엔지니어",
+                        result_Message: "도산, 철산과 함께 삼산텍의 공동창업자이자 소프트웨어 엔지니어. 같은 학교, 같은 동아리 출신 친구다. 대기업을 다니다가 부모님 몰래 그만두고 삼산텍에 합류했다. 잡스나 마윈 같은 성공한 기업가나 위인들의 명언을 포스트잇에 붙이고 인용하기를 즐겨 한다. 적절한 타이밍에 꺼내놓는 명언 포스트잇은 용산의 시그니쳐다. 도산과 철산이 좌절할 때마다 명언을 인용해 독려하고 위로한다."
+                    },
+                    saha: {
+                        name: "정사하: 디자이너",
+                        result_Message: "'팔방미인' 혹은 '사기캐'란 말을 사람으로 정의한다면 바로 사하다. 외모는 웬만한 배우 뺨칠 정도라 길거리 캐스팅 제안을 수도 없이 받았고 미술을 전공했고, 로스쿨까지 졸업한 재원. 뿐인가? 영어 동시통역사 자격증까지 가지고 있다. 때문에 자존심이 드높고 웬만한 사람들이 자신의 눈 아래로 보인다."
+                    },
+                    alex: {
+                        name: "알렉스: 투스토 디렉터",
+                        result_Message: "'세계적인 포털사이트 투스토의 글로벌 파트너십 디렉터. 샌프란시스코에 살고 있으며 재미교포 2세로 한국말에도 능하다. 세련된 매너가 몸에 밴 훈남. 막강한 자본으로 가능성 있는 스타트업을 발굴해 비즈니스 성장을 도우며 협업 혹은 M&A를 진행해 시너지 효과를 노린다. 한국과 중국 시장에서 다수의 스타트업과 파트너십 프로젝트를 리드했었다."
+                    }
+                };
+                var result;
+                switch(prediction[0].className){
+                    case "서달미":
+                        result = results['dalmi']
+                        break;
+                    case "남도산":
+                        result = results['dosan']
+                        break;
+                    case "한지평":
+                        result = results['jipyeong']
+                        break;
+                    case "원인재":
+                        result = results['injae']
+                        break;
+                    case "최원덕":
+                        result = results['wondeok']
+                        break;
+                    case "차아현":
+                        result = results['ahyeon']
+                        break;
+                    case "이철산":
+                        result = results['cheolsan']
+                        break;
+                    case "김용산":
+                        result = results['yongsan']
+                        break;
+                    case "정사하":
+                        result = results['saha']
+                        break;
+                    case "알렉스":
+                        result = results['alex']
+                        break;                        
+                }
+                $('.resultName').html(result['name'])
+                $('.resultMessage').html(result['result_Message'])
+                
+            }
+        </script>
+        <script>
+            /**
+             *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+             *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables    */
+            /*
+    var disqus_config = function () {
+    this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+    this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+    */
+            (function () {
+                // DON'T EDIT BELOW THIS LINE
+                var d = document,
+                    s = d.createElement('script');
+                s.src = 'https://startup-face.disqus.com/embed.js';
+                s.setAttribute('data-timestamp', +new Date());
+                (d.head || d.body).appendChild(s);
+            })();
+        </script>
+        <noscript
+            >Please enable JavaScript to view the
+            <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript
+        >
+        <script>
+            /**
+             *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+             *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables    */
+            /*
+    var disqus_config = function () {
+    this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+    this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+    */
+            (function () {
+                // DON'T EDIT BELOW THIS LINE
+                var d = document,
+                    s = d.createElement('script');
+                s.src = 'https://startup-face.disqus.com/embed.js';
+                s.setAttribute('data-timestamp', +new Date());
+                (d.head || d.body).appendChild(s);
+            })();
+        </script>
+        <noscript
+            >Please enable JavaScript to view the
+            <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript
+        >
         <!-- Option 2: jQuery, Popper.js, and Bootstrap JS -->
         <script
             src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
@@ -146,6 +321,11 @@
                         $('.file-upload-content').show();
 
                         $('.image-title').html(input.files[0].name);
+                        init().then(()=>{
+                            predict();
+                            $('.result').show();
+                        });
+                        
                     };
 
                     reader.readAsDataURL(input.files[0]);
@@ -158,6 +338,7 @@
                 $('.file-upload-input').replaceWith($('.file-upload-input').clone());
                 $('.file-upload-content').hide();
                 $('.image-upload-wrap').show();
+                $('.result').hide();
             }
             $('.image-upload-wrap').bind('dragover', function () {
                 $('.image-upload-wrap').addClass('image-dropping');
