@@ -1,9 +1,13 @@
 .nav-distance {
-    padding: 2.1% 7.7%
+    padding: 3.3% 4.3%;
+}
+@font-face {
+    font-family: 'KOTRA_BOLD';
+    src: url(font/KOTRA_BOLD.ttf);
 }
 
 body {
-    font-family: 'Jua', sans-serif;
+    font-family: KOTRA_BOLD;
     background-color: #ffffff;
     box-sizing: border-box;
     color: #35465d;
@@ -15,17 +19,17 @@ body {
     color: #35465d;
 }
 
-.navbar-light .navbar-toggler{
-    border-color: #ffffff
+.navbar-light .navbar-toggler {
+    border-color: #ffffff;
 }
 
-.github-logo{
-    width: 6%;
-    height: 6%;
+.section {
+    margin-top: 30px;
 }
 
-.section{
-    margin-top: 50px;
+.h1,
+h1 {
+    font-size: 3rem;
 }
 
 .title {
@@ -34,18 +38,17 @@ body {
     color: #35465d;
 }
 
-
 .subtitle {
     line-height: 1.53;
     text-align: center;
     color: #35465d;
 }
 
-@media screen and (max-width: 600px){
-    html{
-        font-size: 10px;
+@media screen and (max-width: 600px) {
+    html {
+        font-size: 0.5rem;
     }
-    .navbar-brand{
+    .navbar-brand {
         font-size: 2rem;
     }
 }
@@ -66,46 +69,46 @@ body {
 }
 
 .file-upload-btn {
-  width: 100%;
-  margin: 0;
-  color: #fff;
-  background: #1FB264;
-  border: none;
-  padding: 10px;
-  border-radius: 4px;
-  border-bottom: 4px solid #15824B;
-  transition: all .2s ease;
-  outline: none;
-  text-transform: uppercase;
-  font-weight: 700;
+    width: 100%;
+    margin: 0;
+    color: #fff;
+    background: #1fb264;
+    border: none;
+    padding: 10px;
+    border-radius: 4px;
+    border-bottom: 4px solid #15824b;
+    transition: all 0.2s ease;
+    outline: none;
+    text-transform: uppercase;
+    font-weight: 700;
 }
 
 .file-upload-btn:hover {
-  background: #1AA059;
-  color: #ffffff;
-  transition: all .2s ease;
-  cursor: pointer;
+    background: #1aa059;
+    color: #ffffff;
+    transition: all 0.2s ease;
+    cursor: pointer;
 }
 
 .file-upload-btn:active {
-  border: 0;
-  transition: all .2s ease;
+    border: 0;
+    transition: all 0.2s ease;
 }
 
 .file-upload-content {
-  display: none;
-  text-align: center;
+    display: none;
+    text-align: center;
 }
 
 .file-upload-input {
-  position: absolute;
-  margin: 0;
-  padding: 0;
-  width: 100%;
-  height: 100%;
-  outline: none;
-  opacity: 0;
-  cursor: pointer;
+    position: absolute;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    outline: none;
+    opacity: 0;
+    cursor: pointer;
 }
 
 .image-upload-wrap {
@@ -114,14 +117,19 @@ body {
     position: relative;
     object-fit: contain;
     border-radius: 10px;
-    border: dashed 1.5px #35465d;
+    border: solid 1.5px #f3953f;
     background-color: #ffffff;
 }
-
+.logo {
+    width: 30%;
+    height: 30%;
+    display: block;
+    margin: 0px auto;
+}
 .image-dropping,
 .image-upload-wrap:hover {
-  background-color: #1FB264;
-  border: 4px dashed #ffffff;
+    background-color: #f3953f;
+    border: 4px dashed #ffffff;
 }
 
 .image-title-wrap {
@@ -139,51 +147,126 @@ body {
     font-size: 1.8rem;
 }
 
-.result{
+.result {
     display: none;
 }
 
 .drag-text {
-  text-align: center;
+    text-align: center;
+    padding: 10%;
 }
 
 .drag-text h3 {
-  font-weight: 100;
-  text-transform: uppercase;
-  color: #15824B;
-  padding: 60px 0;
+    font-weight: 100;
+    text-transform: uppercase;
+    color: #f3953f;
+    padding: 60px 0;
 }
 
 .file-upload-image {
-  max-height: 90%;
-  max-width: 90%;
-  margin: auto;
-  padding: 20px;
+    max-height: 90%;
+    max-width: 90%;
+    margin: auto;
+    padding: 20px;
 }
 
 .remove-image {
-  width: 200px;
-  margin: 0;
-  color: #fff;
-  background: #cd4535;
-  border: none;
-  padding: 10px;
-  border-radius: 4px;
-  border-bottom: 4px solid #b02818;
-  transition: all .2s ease;
-  outline: none;
-  text-transform: uppercase;
-  font-weight: 700;
+    width: 200px;
+    margin: 0;
+    color: #fff;
+    background: #cd4535;
+    border: none;
+    padding: 10px;
+    border-radius: 4px;
+    border-bottom: 4px solid #b02818;
+    transition: all 0.2s ease;
+    outline: none;
+    text-transform: uppercase;
+    font-weight: 700;
 }
 
 .remove-image:hover {
-  background: #c13b2a;
-  color: #ffffff;
-  transition: all .2s ease;
-  cursor: pointer;
+    background: #c13b2a;
+    color: #ffffff;
+    transition: all 0.2s ease;
+    cursor: pointer;
 }
 
 .remove-image:active {
-  border: 0;
-  transition: all .2s ease;
+    border: 0;
+    transition: all 0.2s ease;
+}
+
+.slide {
+    display: block;
+    width: auto;
+    letter-spacing: -1px;
+    font-size: 11px;
+    -webkit-user-select: none;
+    margin: 0 auto;
+}
+.slide input[type='checkbox'] {
+    display: none;
+}
+.slide .slider {
+    display: inline-block;
+    background: #edeff0;
+    border-radius: 16px;
+    width: 104px;
+    height: 34px;
+    position: relative;
+    cursor: pointer;
+}
+.slide .display {
+    display: inline-block;
+    cursor: pointer;
+    vertical-align: top;
+    line-height: 34px;
+    transition: all 250ms;
+    -webkit-transition: all 250ms;
+}
+
+.slide .on {
+    margin-left: 40px;
+    color: #27343e;
+    pointer-events: none;
+}
+.slide .off {
+    margin-right: 40px;
+    color: #edeff0;
+    pointer-events: auto;
+}
+
+.slide input:not(:checked) ~ .on {
+    pointer-events: auto;
+    color: #edeff0;
+}
+.slide input:not(:checked) ~ .off {
+    pointer-events: none;
+    color: #27343e;
+}
+
+.slide input:not(:checked) ~ .on:hover,
+.slide input:checked ~ .off:hover {
+    color: #314554;
+}
+
+.slide .switch {
+    width: 52px;
+    height: 52px;
+    border-radius: 26px;
+    background: #27343e;
+    display: block;
+    position: absolute;
+    top: -9px;
+    left: 0;
+    transition: all 250ms;
+    -webkit-transition: all 250ms;
+}
+.slide .switch:hover {
+    background-color: #314554;
+}
+.slide input:checked ~ label .switch {
+    left: 100%;
+    margin-left: -52px;
 }
