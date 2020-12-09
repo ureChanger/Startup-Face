@@ -22,7 +22,7 @@
     </head>
     <body>
         <nav class="navbar navbar-expand-lg navbar-light nav-distance">
-            <a class="navbar-brand" href="#">스타트업 페이스</a>
+            <a class="navbar-brand" href="#">AI Startup Face</a>
             <button
                 class="navbar-toggler"
                 type="button"
@@ -46,10 +46,10 @@
         <section class="section">
             <img src="src/Samsantech_Logo.png" alt="삼산텍 로고" class="logo" />
             <h1 class="title">
-                스타트업 속 배역 테스트
+                내가 '스타트업'의 등장인물이라면?
             </h1>
             <h2 class="subtitle">
-                인공지능이 알려주는 내 배역
+                인공지능이 판단하는 배역 테스트
             </h2>
             <!-- <div class="slide">
                 <input type="checkbox" id="check" />
@@ -79,7 +79,10 @@
                 </div>
             </div>
             <div class="file-upload-content">
-                <img class="file-upload-image" id="face-image" src="#" alt="your image" />
+                <div class="d-flex justify-content-center">
+                    <img class="file-upload-image" id="face-image" src="#" alt="your image" />
+                    <img class="ai-image" id="face-image" src="src/dosan.jpg" alt="your image"/>
+                </div>
                 <div class="image-title-wrap">
                     <div class="result">
                         <p class="resultName d-flex flex-row bd-highlight"></p>
@@ -92,6 +95,9 @@
                 </div>
             </div>
         </div>
+        <h2 class="upload_message mt-3">
+            *업로드한 사진은 어디에도 저장되지 않습니다.
+        </h2>
 
         <div id="disqus_thread"></div>
         <div id="disqus_thread"></div>
@@ -299,7 +305,15 @@
 
                         $('.file-upload-image').attr('src', e.target.result);
                         $('.file-upload-content').show();
+                        $('.ai-image').css({
+                            margin: "0 auto",
+                            padding: "20px",
+                            width: String($('.file-upload-image').width()),
+                            height:String($('.file-upload-image').height()),
+                        });
 
+                        
+                        
                         $('.image-title').html(input.files[0].name);
                         init().then(() => {
                             predict();

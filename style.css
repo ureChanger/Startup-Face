@@ -29,7 +29,7 @@ body {
 
 .h1,
 h1 {
-    font-size: 3rem;
+    font-size: 2.7rem;
 }
 
 .title {
@@ -64,8 +64,8 @@ h1 {
     padding: 15% 3%;
     margin: 0 auto;
     border-radius: 10px;
-    border: solid 1.5px #f6f7fa;
-    background-color: #f6f7fa;
+    border: solid 1.5px #faf3db;
+    background-color: #faf3db;
 }
 
 .file-upload-btn {
@@ -117,7 +117,7 @@ h1 {
     position: relative;
     object-fit: contain;
     border-radius: 10px;
-    border: solid 1.5px #f3953f;
+    border: dashed 1.5px #f3953f;
     background-color: #ffffff;
 }
 .logo {
@@ -138,9 +138,9 @@ h1 {
 }
 
 .resultName {
-    font-size: 2rem;
-    color: #004f9f;
-    font-weight: bold;
+    font-size: 2.5rem;
+    color: #ff843a;
+    font-weight: lighter;
 }
 
 .resultMessage {
@@ -195,6 +195,11 @@ h1 {
 .remove-image:active {
     border: 0;
     transition: all 0.2s ease;
+}
+
+.upload_message{
+    text-align: center;
+    font-size: 1.5rem;
 }
 
 .slide {
