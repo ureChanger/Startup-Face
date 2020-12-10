@@ -84,13 +84,107 @@
                 </div>
 
                 <div class="image-title-wrap">
+                    <div class="loader loader--style8" title="7">
+                        <svg
+                            version="1.1"
+                            id="Layer_1"
+                            xmlns="http://www.w3.org/2000/svg"
+                            xmlns:xlink="http://www.w3.org/1999/xlink"
+                            x="0px"
+                            y="0px"
+                            width="24px"
+                            height="30px"
+                            viewBox="0 0 24 30"
+                            style="enable-background: new 0 0 50 50;"
+                            xml:space="preserve"
+                        >
+                            <rect x="0" y="10" width="4" height="10" fill="#333" opacity="0.2">
+                                <animate
+                                    attributeName="opacity"
+                                    attributeType="XML"
+                                    values="0.2; 1; .2"
+                                    begin="0s"
+                                    dur="0.6s"
+                                    repeatCount="indefinite"
+                                />
+                                <animate
+                                    attributeName="height"
+                                    attributeType="XML"
+                                    values="10; 20; 10"
+                                    begin="0s"
+                                    dur="0.6s"
+                                    repeatCount="indefinite"
+                                />
+                                <animate
+                                    attributeName="y"
+                                    attributeType="XML"
+                                    values="10; 5; 10"
+                                    begin="0s"
+                                    dur="0.6s"
+                                    repeatCount="indefinite"
+                                />
+                            </rect>
+                            <rect x="8" y="10" width="4" height="10" fill="#333" opacity="0.2">
+                                <animate
+                                    attributeName="opacity"
+                                    attributeType="XML"
+                                    values="0.2; 1; .2"
+                                    begin="0.15s"
+                                    dur="0.6s"
+                                    repeatCount="indefinite"
+                                />
+                                <animate
+                                    attributeName="height"
+                                    attributeType="XML"
+                                    values="10; 20; 10"
+                                    begin="0.15s"
+                                    dur="0.6s"
+                                    repeatCount="indefinite"
+                                />
+                                <animate
+                                    attributeName="y"
+                                    attributeType="XML"
+                                    values="10; 5; 10"
+                                    begin="0.15s"
+                                    dur="0.6s"
+                                    repeatCount="indefinite"
+                                />
+                            </rect>
+                            <rect x="16" y="10" width="4" height="10" fill="#333" opacity="0.2">
+                                <animate
+                                    attributeName="opacity"
+                                    attributeType="XML"
+                                    values="0.2; 1; .2"
+                                    begin="0.3s"
+                                    dur="0.6s"
+                                    repeatCount="indefinite"
+                                />
+                                <animate
+                                    attributeName="height"
+                                    attributeType="XML"
+                                    values="10; 20; 10"
+                                    begin="0.3s"
+                                    dur="0.6s"
+                                    repeatCount="indefinite"
+                                />
+                                <animate
+                                    attributeName="y"
+                                    attributeType="XML"
+                                    values="10; 5; 10"
+                                    begin="0.3s"
+                                    dur="0.6s"
+                                    repeatCount="indefinite"
+                                />
+                            </rect>
+                        </svg>
+                    </div>
+                    <h2 class="loadingMessage">
+                        AI가 당신의 배역을 분석중입니다.
+                    </h2>
                     <div class="result">
-                        <div class="container">
-                            <div class="c-track"></div>
-                            <div class="c-left"></div>
-                            <div class="c-right"></div>
-                            <div class="c-cover"></div>
-                            <div class="c-text"><i>80</i><i class="small">%</i></div>
+                        <div class="canvas-wrap">
+                            <canvas id="canvas"></canvas>
+                            <span id="procent"></span>
                         </div>
                         <p class="resultName d-flex flex-row bd-highlight"></p>
                         <p class="resultMessage"></p>
@@ -108,6 +202,7 @@
 
         <div id="disqus_thread"></div>
         <div id="disqus_thread"></div>
+
         <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.3.1/dist/tf.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@0.8/dist/teachablemachine-image.min.js"></script>
         <script type="text/javascript">
@@ -130,26 +225,13 @@
                 // Note: the pose library adds "tmImage" object to your window (window.tmImage)
                 model = await tmImage.load(modelURL, metadataURL);
                 maxPredictions = model.getTotalClasses();
-
-                // append elements to the DOM
-                labelContainer = document.getElementById('label-container');
-                for (let i = 0; i < maxPredictions; i++) {
-                    // and class labels
-                    labelContainer.appendChild(document.createElement('div'));
-                }
             }
 
-            // run the webcam image through the image model
             async function predict() {
                 // predict can take in an image, video or canvas html element
                 face_image = document.getElementById('face-image');
                 const prediction = await model.predict(face_image);
                 prediction.sort((a, b) => (b.probability > a.probability ? 1 : -1));
-                for (let i = 0; i < maxPredictions; i++) {
-                    const classPrediction =
-                        prediction[i].className + ': ' + prediction[i].probability.toFixed(2);
-                    labelContainer.childNodes[i].innerHTML = classPrediction;
-                }
                 const results = {
                     dalmi: {
                         name: '서달미: CEO',
@@ -237,6 +319,8 @@
                 }
                 $('.resultName').html(result['name']);
                 $('.resultMessage').html(result['result_Message']);
+                
+                return prediction[0].probability.toFixed(2);
             }
         </script>
         <script>
@@ -302,26 +386,78 @@
             crossorigin="anonymous"
         ></script>
         <script>
+            function canvasScore(prediction) {
+                var can = document.getElementById('canvas'),
+                    spanProcent = document.getElementById('procent'),
+                    c = can.getContext('2d');
+
+                var score = (100*prediction)
+                
+
+                var posX = can.width / 2,
+                    posY = can.height / 2,
+                    fps = 1000 / 200,
+                    procent = 0,
+                    oneProcent = 360 / 100,
+                    result = oneProcent * score;
+                // [0].probability.toFixed(2);
+
+                c.lineCap = 'round';
+                arcMove();
+
+                function arcMove() {
+                    var deegres = 0;
+                    var acrInterval = setInterval(function () {
+                        deegres += 1;
+                        c.clearRect(0, 0, can.width, can.height);
+                        procent = deegres / oneProcent;
+
+                        spanProcent.innerHTML = procent.toFixed();
+
+                        c.beginPath();
+                        c.arc(posX, posY, 70, (Math.PI / 180) * 270, (Math.PI / 180) * (270 + 360));
+                        c.strokeStyle = '#b1b1b1';
+                        c.lineWidth = '10';
+                        c.stroke();
+
+                        c.beginPath();
+                        c.strokeStyle = '#ff843a';
+                        c.lineWidth = '10';
+                        c.arc(
+                            posX,
+                            posY,
+                            70,
+                            (Math.PI / 180) * 270,
+                            (Math.PI / 180) * (270 + deegres)
+                        );
+                        c.stroke();
+                        if (deegres >= result) clearInterval(acrInterval);
+                    }, fps);
+                }
+            }
+        </script>
+        <script>
             function readURL(input) {
                 if (input.files && input.files[0]) {
                     var reader = new FileReader();
 
                     reader.onload = function (e) {
                         $('.image-upload-wrap').hide();
-
+                        $('.loader').show();
+                        $('.loadingMessage').show();
                         $('.file-upload-image').attr('src', e.target.result);
                         $('.file-upload-content').show();
+                        $('.remove-image').hide();
 
                         $('.image-title').html(input.files[0].name);
-                        init().then(() => {
-                            predict();
+                        init().then(async () => {
+                            var prediction = await predict();
+                            canvasScore(prediction);
+                            
+                            $('.loader').hide();
+                            $('.loadingMessage').hide();
                             $('.result').show();
-                            $(document).ready(function () {
-                                $('.container').removeClass('active').addClass('active');
-
-                                //https://idiotwu.me/css3-progress-ring/
-                                $('.progress-ring').loadingRing();
-                            });
+                            $('.remove-image').show();
                         });
                     };
 
