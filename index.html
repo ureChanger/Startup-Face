@@ -19,6 +19,11 @@
         />
         <link rel="stylesheet" href="style.css" />
         <title>스타트업 페이스</title>
+        <!-- Go to www.addthis.com/dashboard to customize your tools -->
+        <script
+            type="text/javascript"
+            src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5fd2ac1d82278555"
+        ></script>
     </head>
     <body>
         <nav class="navbar navbar-expand-lg navbar-light nav-distance">
@@ -51,14 +56,6 @@
             <h2 class="subtitle">
                 인공지능이 판단하는 배역 테스트
             </h2>
-            <!-- <div class="slide">
-                <input type="checkbox" id="check" />
-                <label for="check" class="display off">OFF</label>
-                <label for="check" class="slider">
-                    <span class="switch"></span>
-                </label>
-                <label for="check" class="display on">ON</label>
-            </div> -->
         </section>
 
         <script
@@ -193,6 +190,10 @@
                     <button type="button" onclick="removeUpload()" class="remove-image mt-5">
                         다시하기
                     </button>
+                    
+                <!-- Go to www.addthis.com/dashboard to customize your tools -->
+                <div class="addthis_inline_share_toolbox_irv5 mt-5"></div>
+            
                 </div>
             </div>
         </div>
@@ -272,8 +273,8 @@
                 return prediction[0].probability.toFixed(2);
             }
         </script>
-        <script src='data/result_data.js'></script>
-        
+        <script src="data/result_data.js"></script>
+
         <!-- Option 2: jQuery, Popper.js, and Bootstrap JS -->
         <script
             src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
@@ -352,7 +353,7 @@
                         $('.file-upload-image').attr('src', e.target.result);
                         $('.file-upload-content').show();
                         $('.remove-image').hide();
-
+                        $('.addthis_inline_share_toolbox_irv5').hide();
                         $('.image-title').html(input.files[0].name);
                         init().then(async () => {
                             var prediction = await predict();
@@ -362,6 +363,7 @@
                             $('.loadingMessage').hide();
                             $('.result').show();
                             $('.remove-image').show();
+                            $('.addthis_inline_share_toolbox_irv5').show();
                         });
                     };
 
@@ -372,7 +374,6 @@
             }
 
             function removeUpload() {
-                
                 $('.file-upload-input').replaceWith($('.file-upload-input').clone());
                 $('.file-upload-content').hide();
                 $('.image-upload-wrap').show();
