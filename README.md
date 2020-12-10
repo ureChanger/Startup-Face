@@ -4,7 +4,7 @@
 https://urechanger.github.io/Startup-Face/
 
 ## 주요 등장인물 10인
-|Name|sample datas|Name|sample datas|
+|Name|Number of data|Name|Number of data|
 |---|---|---|---|
 |서달미|758|남도산|689|
 |원인재|743|한지평|703|
