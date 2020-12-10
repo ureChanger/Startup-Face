@@ -1,8 +1,10 @@
 # Startup-Face
 드라마 '스타트업' 의 등장인물 사진을 이미지 인식 모델에 학습시켜 업로드 한 사진과의 유사도를 판단하는 프로젝트
 
+https://urechanger.github.io/Startup-Face/
+
 ## 주요 등장인물 10인
-|Name|sample datas|Name|sample datas|
+|Name|Number of data|Name|Number of data|
 |---|---|---|---|
 |서달미|758|남도산|689|
 |원인재|743|한지평|703|
