@@ -51,6 +51,11 @@ h1 {
     .navbar-brand {
         font-size: 2rem;
     }
+    
+    .logo {
+        width: 110px;
+        height: 110px;
+    }
 }
 
 .github-link {
@@ -121,8 +126,8 @@ h1 {
     background-color: #ffffff;
 }
 .logo {
-    width: 30%;
-    height: 30%;
+    width: 110px;
+    height: 110px;
     display: block;
     margin: 0px auto;
 }
@@ -197,7 +202,7 @@ h1 {
     transition: all 0.2s ease;
 }
 
-.upload_message{
+.upload_message {
     text-align: center;
     font-size: 1.5rem;
 }
@@ -274,4 +279,81 @@ h1 {
 .slide input:checked ~ label .switch {
     left: 100%;
     margin-left: -52px;
+}
+
+.container {
+    position: relative;
+    left: 0;
+    top: 0;
+    width: 130px;
+    height: 130px;
+    float: left;
+    margin: 20px;
+}
+.container div {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 130px;
+    height: 130px;
+    border: 16.25px solid #dadada;
+    border-radius: 50%;
+    box-sizing: border-box;
+}
+.container .c-text {
+    font-family: arial;
+    font-size: 30px;
+    color: #333;
+    line-height: 130px;
+    text-align: center;
+    border: 0 none;
+}
+.container .c-text .small {
+    font-size: 50%;
+    font-style: italic;
+}
+.container .c-left,
+.container .c-right,
+.container .c-cover {
+    clip: rect(0 65px 130px 0);
+}
+.container .c-left,
+.container .c-right {
+    border-color: #ff843a;
+}
+.container .c-right {
+    opacity: 0;
+    transform: rotate(180deg);
+}
+
+.container.active .c-right {
+    opacity: 1;
+    animation: toggle 1.25s step-end;
+}
+
+.container.active .c-cover {
+    opacity: 0;
+    animation: toggle 1.25s step-start;
+}
+
+.container.active .c-left {
+    transform: rotate(288deg);
+    transition: transform 2s linear;
+}
+
+@keyframes toggle {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+.container.full div {
+    border-width: 65px;
+}
+
+.progress-ring {
+    float: left;
+    margin: 20px;
 }
