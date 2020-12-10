@@ -185,7 +185,7 @@ h1 {
     width: 200px;
     margin: 0;
     color: #fff;
-    background: #b2b2b2;
+    background: #ff843a;
     border: none;
     padding: 10px;
     border-radius: 4px;
@@ -304,8 +304,9 @@ svg rect {
 }
 
 span#procent {
+    margin-top: -25%;
     display: block;
-    position: absolute;
+    position: relative;
     left: 50%;
     top: 50%;
     font-size: 4rem;
@@ -320,6 +321,4 @@ span#procent::after {
 .canvas-wrap {
     display: inline-table;
     position: relative;
-    width: 140px;
-    height: 140px;
 }
