@@ -31,7 +31,6 @@ body {
 h1 {
     font-size: 2.7rem;
     margin: 1em 0;
-    padding-bottom: 1em;
     font-weight: lighter;
 }
 
@@ -149,6 +148,11 @@ h1 {
     font-size: 2.5rem;
     color: #ff843a;
     font-weight: lighter;
+}
+
+.resultRealName {
+    font-size: 2rem;
+    color: #ff843a;
 }
 
 .resultMessage {
@@ -328,4 +332,40 @@ span#procent::after {
 .canvas-wrap {
     display: inline-table;
     position: relative;
+}
+
+.ad-banner {
+    width: 320px;
+    margin: 0 auto;
+}
+
+.ad-banner_2 {
+    width: 250px;
+    margin: 0 auto;
+}
+
+.btn {
+    display: block;
+}
+
+.btn-primary {
+    background-color: #e50914;
+    border-color: #e50914;
+}
+
+.btn-primary:hover{
+    background-color: #e50914;
+    border-color: #e50914;
+}
+
+.card-body {
+    background-color: #000000;
+}
+
+.card-title {
+    color: #fff;
+}
+
+.card-text {
+    color: #fff;
 }
