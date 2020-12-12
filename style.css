@@ -124,7 +124,7 @@ h1 {
     position: relative;
     object-fit: contain;
     border-radius: 10px;
-    border: dashed 1.5px #f3953f;
+    border: dashed 4px #f3953f;
     background-color: #ffffff;
 }
 .logo {
