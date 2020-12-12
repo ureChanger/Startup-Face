@@ -358,6 +358,17 @@ span#procent::after {
     border-color: #e50914;
 }
 
+.btn-primary:not(:disabled):not(.disabled):active {
+    background-color: #92060d;
+    border-color: #92060d;
+}
+
+.btn-primary:focus{
+    background-color: #92060d;
+    border-color: #92060d;
+    box-shadow: 0 0 0 0.2rem #92060d;
+}
+
 .card-body {
     background-color: #000000;
 }
