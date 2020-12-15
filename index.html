@@ -73,11 +73,6 @@
                 data-ad-width="320"
                 data-ad-height="100"
             ></ins>
-            <script
-                type="text/javascript"
-                src="//t1.daumcdn.net/kas/static/ba.min.js"
-                async
-            ></script>
             <h1 class="title">
                 드라마 '스타트업' 일상 테스트
             </h1>
@@ -207,7 +202,9 @@
                         AI가 당신의 배역을 분석중입니다.
                     </h2>
                     <div class="result">
-                        <p class="resultRealName d-flex flex-row bd-highlight">연예인 수지와의 일치율 :</p>
+                        <p class="resultRealName d-flex flex-row bd-highlight">
+                            연예인 수지와의 일치율 :
+                        </p>
                         <div class="canvas-wrap">
                             <canvas id="canvas" style="width: 25rem;"></canvas>
                             <span id="procent"></span>
@@ -223,11 +220,6 @@
                         data-ad-width="250"
                         data-ad-height="250"
                     ></ins>
-                    <script
-                        type="text/javascript"
-                        src="//t1.daumcdn.net/kas/static/ba.min.js"
-                        async
-                    ></script>
                     <button type="button" onclick="removeUpload()" class="remove-image mt-5">
                         다시하기
                     </button>
@@ -244,9 +236,9 @@
             <ins
                 class="kakao_ad_area"
                 style="display: none;"
-                data-ad-unit="DAN-YZUkcUK9ymZe6nUi"
-                data-ad-width="320"
-                data-ad-height="100"
+                data-ad-unit="DAN-ZXqJSpNueOK2yOsf"
+                data-ad-width="300"
+                data-ad-height="250"
             ></ins>
         </div>
         <div class="card mt-5" style="width: 25rem; margin: 0 auto;">
@@ -274,22 +266,22 @@
                 data-ad-width="250"
                 data-ad-height="250"
             ></ins>
-
-            <ins
-                class="kakao_ad_area"
-                style="display: none;"
-                data-ad-unit="DAN-jpW1gtL7ZlNYroQn"
-                data-ad-width="250"
-                data-ad-height="250"
-            ></ins>
         </div>
-        <div class= "mt-5" style="padding:20px 0px; width: 100%; text-align: center; background-color: #35465d; color: #fff">
+        <div
+            class="mt-5"
+            style="
+                padding: 20px 0px;
+                width: 100%;
+                text-align: center;
+                background-color: #35465d;
+                color: #fff;
+            "
+        >
             <p class="copyright">
-                Copyright © 2020. 박길현 ParkGil-Hyeon. All rights reserved. 
+                Copyright © 2020. 박길현 ParkGil-Hyeon. All rights reserved.
             </p>
             <a href="https://github.com/ureChanger">Developer Github</a>
         </div>
-        <script type="text/javascript" src="//t1.daumcdn.net/kas/static/ba.min.js" async></script>
         <script type="text/javascript" src="//t1.daumcdn.net/kas/static/ba.min.js" async></script>
         <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.3.1/dist/tf.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@0.8/dist/teachablemachine-image.min.js"></script>
@@ -356,8 +348,7 @@
                 }
                 $('.resultName').html(result['name']);
                 $('.resultMessage').html(result['result_Message']);
-                $('.resultRealName').html(result['real_name']+"님과의 일치율");
-                
+                $('.resultRealName').html(result['real_name'] + '님과의 일치율');
 
                 return prediction[0].probability.toFixed(2);
             }
