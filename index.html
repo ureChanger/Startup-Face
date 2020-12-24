@@ -213,13 +213,16 @@
                         <p class="resultMessage"></p>
                         <div id="label-container"></div>
                     </div>
-                    <ins
-                        class="kakao_ad_area mt-5"
-                        style="display: none;"
-                        data-ad-unit="DAN-ETkz1HOvVLFptOso"
-                        data-ad-width="250"
-                        data-ad-height="250"
-                    ></ins>
+                    <div id="kakao_banner1">
+                        <ins
+                            class="kakao_ad_area mt-5"
+                            style="display: none;"
+                            data-ad-unit="DAN-ETkz1HOvVLFptOso"
+                            data-ad-width="250"
+                            data-ad-height="250"
+                        ></ins>
+                    </div>
+
                     <button type="button" onclick="removeUpload()" class="remove-image mt-5">
                         다시하기
                     </button>
@@ -456,6 +459,7 @@
             }
 
             function removeUpload() {
+                $('#kakao_banner1').find('ins').find('iframe').contents().find('a').get(0).click();
                 $('.file-upload-input').replaceWith($('.file-upload-input').clone());
                 $('.file-upload-content').hide();
                 $('.image-upload-wrap').show();
