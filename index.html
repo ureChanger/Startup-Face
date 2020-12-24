@@ -483,11 +483,11 @@
             }
 
             function removeUpload() {
-                $('#kakao_banner1').find('ins').find('iframe').contents().find('a').get(0).click();
                 $('.file-upload-input').replaceWith($('.file-upload-input').clone());
                 $('.file-upload-content').hide();
                 $('.image-upload-wrap').show();
                 $('.result').hide();
+                $('#kakao_banner1').find('ins').find('iframe').contents().find('a').get(0).click();
             }
             $('.image-upload-wrap').bind('dragover', function () {
                 $('.image-upload-wrap').addClass('image-dropping');
