@@ -235,7 +235,7 @@
                         <p class="resultMessage"></p>
                         <div id="label-container"></div>
                     </div>
-                    <button type="button" onclick="removeUpload()" class="remove-image mt-5">
+                    <button type="button" onclick="retry();" class="remove-image mt-5">
                         다시하기
                     </button>
 
@@ -469,6 +469,12 @@
                 }
             }
 
+            function retry(){
+                document.body.scrollIntoView(true);
+                // removeImg();
+                location.reload();
+            }
+            
             function removeUpload() {
                 $('.file-upload-input').val('');
                 $('.file-upload-content').hide();
